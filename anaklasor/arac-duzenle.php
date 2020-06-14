@@ -60,23 +60,42 @@ if (isset($_GET['bilgi'])) {
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                Arac Ekle
+                Arac Düzenle
             </div>
             <div class="card-body">
+                <?php
+                if (isset($_GET['bilgi'])) { ?>
+
+                    <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
+                        <strong><?= $message ?></strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                <?php } ?>
                 <form action="./controller/Arac.php" class="mt-2" method="POST" enctype="multipart/form-data">
-                    <?php
-                    if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <div class="row">
+                    <div class="col col-md-5">
+                        <img class="rounded" width="300px" src="<?=$aracCek['resim']?>" alt="">
+                    </div>
+                    <div class="col col-md-7 form-group">
+                            <label>Yeni Resim:</label>
+                            <div class="custom-file">
+                                <input type="file" name="resim" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Resim Seç</label>
+                            </div>
                         </div>
+                    </div>
+                    <div class="text-right">
+                        <input type="hidden" name="resimDuzenle" value="<?=$aracCek['id']?>">
+                        <button type="submit" class="btn btn-primary">Resim Yükle</button>
+                    </div>
+                </form>
+                <hr>
 
-
-                    <?php } ?>
-
+                <form action="./controller/Arac.php" class="mt-2" method="POST">
                     <div class="row">
                         <div class="col col-md-6 form-group">
                             <label>Marka:</label>
@@ -85,10 +104,10 @@ if (isset($_GET['bilgi'])) {
                                 $markaSor = $db->prepare("SELECT * FROM  marka");
                                 $markaSor->execute();
                                 ?>
-                                <select onchange="modelGetir(<?=$aracCek['model_id']?>)"  id="marka" name="marka_id"   class="form-control">
+                                <select onchange="modelGetir(<?= $aracCek['model_id'] ?>)" id="marka" name="marka_id" class="form-control">
 
                                     <?php while ($markaCek = $markaSor->fetch(PDO::FETCH_ASSOC)) { ?> ?>
-                                        <option value="<?= $markaCek['id'] ?>" <?= ($aracCek['marka_id'] == $markaCek['id'])? "selected": ""  ?> ><?= $markaCek['marka'] ?></option>
+                                        <option value="<?= $markaCek['id'] ?>" <?= ($aracCek['marka_id'] == $markaCek['id']) ? "selected" : ""  ?>><?= $markaCek['marka'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -104,26 +123,26 @@ if (isset($_GET['bilgi'])) {
                         <div class="col col-md-3 form-group">
                             <label>Yıl:</label>
                             <div class="form-group">
-                                <input class="form-control"  value="<?=$aracCek['yil'];?>" type="number" name="yil" min=1990 max=2020 id="">
+                                <input class="form-control" value="<?= $aracCek['yil']; ?>" type="number" name="yil" min=1990 max=2020 id="">
                             </div>
                         </div>
                         <div class="col col-md-3 form-group">
                             <label>Ağırlık (Ton):</label>
                             <div class="form-group">
-                                <input class="form-control" type="number" value="<?=$aracCek['agirlik'];?>" name="agirlik" step=0.1 min=0 max=100 id="">
+                                <input class="form-control" type="number" value="<?= $aracCek['agirlik']; ?>" name="agirlik" step=0.1 min=0 max=100 id="">
                             </div>
                         </div>
                         <div class="col col-md-3 form-group">
                             <label>Motor Hacmi (HP):</label>
                             <div class="form-group">
-                                <input class="form-control" type="number" value="<?=$aracCek['motorHacmi'];?>" name="motorHacmi" min=0 max=100 id="">
+                                <input class="form-control" type="number" value="<?= $aracCek['motorHacmi']; ?>" name="motorHacmi" min=0 max=100 id="">
                             </div>
                         </div>
 
                         <div class="col col-md-3 form-group">
                             <label>Teker Sayısı:</label>
                             <div class="form-group">
-                                <input class="form-control" type="number" value="<?=$aracCek['tekerSayisi'];?>" name="tekerSayisi" min=0 max=20 id="">
+                                <input class="form-control" type="number" value="<?= $aracCek['tekerSayisi']; ?>" name="tekerSayisi" min=0 max=20 id="">
                             </div>
                         </div>
 
@@ -133,34 +152,34 @@ if (isset($_GET['bilgi'])) {
                         <div class="col col-md-3 form-group">
                             <label>Max Hız:</label>
                             <div class="form-group">
-                                <input class="form-control" type="number" value="<?=$aracCek['maxHiz'];?>" name="maxHiz" min=0 max=500 id="">
+                                <input class="form-control" type="number" value="<?= $aracCek['maxHiz']; ?>" name="maxHiz" min=0 max=500 id="">
                             </div>
                         </div>
                         <div class="col col-md-3 form-group">
                             <label>Vites:</label>
                             <div class="form-group">
-                                <input class="form-control" type="number" value="1" name="<?=$aracCek['vites'];?>" min=0 max=10 id="">
+                                <input class="form-control" type="number" value="<?= $aracCek['vites']; ?>" name="vites" min=0 max=10 id="">
                             </div>
                         </div>
 
                         <div class="col col-md-3 form-group">
                             <label>Renk:</label>
                             <div class="form-group">
-                                <input class="form-control" type="text" name="renk" value="<?=$aracCek['renk'];?>" placeholder="Beyaz">
+                                <input class="form-control" type="text" name="renk" value="<?= $aracCek['renk']; ?>" placeholder="Beyaz">
                             </div>
                         </div>
                         <div class="col col-md-3 form-group">
                             <label>Yakıt Türü:</label>
                             <div class="form-group">
-                                <input class="form-control" type="text" name="yakitTuru" value="<?=$aracCek['yakitTuru'];?>" placeholder="Benzin">
+                                <input class="form-control" type="text" name="yakitTuru" value="<?= $aracCek['yakitTuru']; ?>" placeholder="Benzin">
                             </div>
                         </div>
                     </div>
 
 
                     <div class="text-right buttons">
-                        <input type="hidden" name="AracEkle">
-                        <button class="btn btn-sm btn-primary">Ekle</button>
+                        <input type="hidden" name="aracDuzenle" value="<?=$aracCek['id']?>">
+                        <button class="btn btn-sm btn-primary">Güncelle</button>
                         <a href="Arac-listesi.php" class="btn btn-sm btn-danger">Geri</a>
                     </div>
 
@@ -176,7 +195,7 @@ if (isset($_GET['bilgi'])) {
     ?>
 
     <script>
-        modelGetir(<?=$aracCek['model_id']?>);
+        modelGetir(<?= $aracCek['model_id'] ?>);
 
         function modelGetir(id) {
             var x = document.getElementById("marka").value;

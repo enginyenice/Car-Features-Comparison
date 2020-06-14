@@ -27,7 +27,7 @@ if (isset($_POST['AracEkle'])) {
     $resim = $_FILES['resim'];
     $boyut = $resim['size'];
     if ($boyut > (1024 * 1024 * 10)) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=resimBuyuk");
+        header("Location: /araba-karsilastirma/anaklasor/arac-ekle.php?bilgi=resimBuyuk");
     }
 
     $tip = $resim['type'];
@@ -35,7 +35,7 @@ if (isset($_POST['AracEkle'])) {
     $uzanti = explode('.', $isim);
     $uzanti = $uzanti[count($uzanti) - 1];
     if ($tip != 'image/jpeg' || $uzanti != 'jpg') {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=JPG");
+        header("Location: /araba-karsilastirma/anaklasor/arac-ekle.php?bilgi=JPG");
     }
     $dosya = $resim['tmp_name'];
     $yeniAd = RandomTextUret(5) . $resim['name'];
@@ -78,33 +78,88 @@ if (isset($_POST['AracEkle'])) {
     }
 }
 
-if (isset($_POST['modelDuzenle'])) {
-    $id = $_POST['modelDuzenle'];
-    $model = $_POST['model'];
+if (isset($_POST['aracDuzenle'])) {
     $marka_id = $_POST['marka_id'];
-    $modelSor = $db->prepare("SELECT count(*) AS Adet FROM model WHERE id=:id");
-    $modelCek = $modelSor->execute(array(
-        "id"    => $id
-    ));
-    $modelCek = $modelSor->fetch(PDO::FETCH_ASSOC);
-    $modelVarMi = ($modelCek['Adet'] > 0) ? true : false;
-    if ($modelVarMi == true) {
-        $modelDuzenle = $db->prepare("UPDATE model SET
-       model=:model, marka_id=:marka_id
-       WHERE id=:id");
-        $modelDuzenle->execute(array(
-            "model"    => $model,
-            "marka_id"  => $marka_id,
-            "id"    => $id
-        ));
-        if ($modelDuzenle) {
-            header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=duzenleme");
-        } else {
-            header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?id=" . $id . "&bilgi=bilinmeyen");
-        }
-    } else {
+    $model_id = $_POST['model_id'];
+    $yil = $_POST['yil'];
+    $agirlik = $_POST['agirlik'];
+    $tekerSayisi = $_POST['tekerSayisi'];
+    $motorHacmi = $_POST['motorHacmi'];
+    $maxHiz = $_POST['maxHiz'];
+    $vites = $_POST['vites'];
+    $renk = $_POST['renk'];
+    $yakitTuru = $_POST['yakitTuru'];
+    $id = $_POST['aracDuzenle'];
+    
 
-        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?id=" . $id . "&bilgi=aynimodel");
+    
+    $aracDuzenle = $db->prepare("UPDATE arac SET 
+    marka_id=:marka_id,
+    model_id=:model_id,
+    yil=:yil,
+    agirlik=:agirlik,
+    motorHacmi=:motorHacmi,
+    tekerSayisi=:tekerSayisi,
+    maxHiz=:maxHiz,
+    vites=:vites,
+    renk=:renk,
+    yakitTuru=:yakitTuru
+    WHERE id=:id
+    ");
+    $insert = $aracDuzenle->execute(array(
+        "marka_id"      => $marka_id,
+        "model_id"      => $model_id,
+        "yil"           => $yil,
+        "agirlik"       => $agirlik,
+        "motorHacmi"    => $motorHacmi,
+        "tekerSayisi"   => $tekerSayisi,
+        "maxHiz"        => $maxHiz,
+        "vites"         => $vites,
+        "renk"          => $renk,
+        "yakitTuru"     => $yakitTuru,
+        "id"            => $id
+
+    ));
+   
+
+    if ($insert) {
+        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=duzenleme");
+    } else {
+        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=bilinmeyen");
+    }
+}
+
+if(isset($_POST['resimDuzenle']))
+{
+    $id = $_POST['resimDuzenle'];
+    $resim = $_FILES['resim'];
+    $boyut = $resim['size'];
+    if ($boyut > (1024 * 1024 * 10)) {
+        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?bilgi=resimBuyuk");
+    }
+
+    $tip = $resim['type'];
+    $isim = $resim['name'];
+    $uzanti = explode('.', $isim);
+    $uzanti = $uzanti[count($uzanti) - 1];
+    if ($tip != 'image/jpeg' || $uzanti != 'jpg') {
+        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?bilgi=JPG");
+    }
+    $dosya = $resim['tmp_name'];
+    $yeniAd = RandomTextUret(5) . $resim['name'];
+    $yeniYol = "../images/" . $yeniAd;
+    $yol = $yeniYol;
+    copy($dosya, $yeniYol);
+    $aracResimDuzenle = $db->prepare("UPDATE arac SET resim=:resim WHERE id=:id");
+    $update = $aracResimDuzenle->execute(array(
+        "resim"         => "anaklasor/".$yol,
+        "id"            => $id
+
+    ));
+    if ($update) {
+        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=resimDuzenle");
+    } else {
+        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?bilgi=bilinmeyen");
     }
 }
 

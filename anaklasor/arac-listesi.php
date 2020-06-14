@@ -26,6 +26,12 @@ if (isset($_GET['bilgi'])) {
             $message = "Duzenlemek istediginiz Arac sistemde kayıtlı değil.";
             $status = "warning";
             break;
+        
+        case 'resimDuzenle':
+            $message = "Araç resmi başarıyla değiştirildi.";
+            $status = "success";
+            break;
+        
         case 'bilinmeyen':
             $message = "Beklenmedik bir hata oluştu.";
             $status = "danger";
