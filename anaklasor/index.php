@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="tr">
+<title>Anasayfa</title>
 <?php include("./assets/head.php")?>
 <?php include("./assets/nav.php")?>
 <body class="">

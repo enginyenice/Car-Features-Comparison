@@ -8,9 +8,9 @@ $password = "123456789";
 
 try {
     $db = new PDO("mysql:host=".$servername.";dbname=".$database.";charset=utf8", $username, $password);
-   // echo "Bağlandın";
+   //echo "Bağlandın";
 }
-catch (PDOExpception $hata){
+catch (Exception $hata){
     //echo $hata->getMessage();
 }
 ?>

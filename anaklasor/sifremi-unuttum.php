@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="tr">
-    
+<title>Şifremi Unuttum</title>
 <?php include("./assets/head.php");
 if(isset($_GET['bilgi'])){
 

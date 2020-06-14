@@ -2,6 +2,7 @@
 
 ob_start();
 session_start();
+include("./controller/DB.php");
 
 //echo $_SERVER['SCRIPT_NAME'];
 // 1. örnek
@@ -18,7 +19,7 @@ switch ($dosya) {
         if($sessionDurumu == 1)
             iceriYonlendir();
     break;
-    case 'index': case '':
+    case 'index': case '': case 'hesabim':
         if($sessionDurumu == 0)
             girisYonlendir();
 }
@@ -39,6 +40,6 @@ function iceriYonlendir(){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../eklentiler/boostrap/css/bootstrap.min.css">
-    <title>Hello, world!</title>
+
     <!-- HEAD END -->
 </head>

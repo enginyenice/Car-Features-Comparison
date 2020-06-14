@@ -29,6 +29,7 @@ if (isset($_POST["girisYap"])) {
         if ($aktifMi) {
             $_SESSION['eposta'] = $kullaniciBilgiCek['eposta'];
             $_SESSION['id'] = $kullaniciBilgiCek['id'];
+            $_SESSION['sifre'] = $kullaniciBilgiCek['sifre'];
             header("Location: /araba-karsilastirma/anaklasor/index.php");
         } else {
             header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=aktivasyon");
@@ -51,7 +52,7 @@ if (isset($_POST['kayitOl'])) {
     $epostaCek = $epostaSor->fetch(PDO::FETCH_ASSOC);
     $epostaVarMi = ($epostaCek['Adet'] > 0) ? true : false;
 
-    if (strlen($adSoyad) < 3 || strlen($eposta) < 3 || strlen($sifre) < 3) {
+    if (strlen($adSoyad) < 4 || strlen($eposta) < 4 || strlen($sifre) < 4) {
         header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=kisa");
     } else if ($sifre != $sifre2) {
         header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=sifre");
@@ -144,14 +145,71 @@ function RandomTextUret($length = 10)
     }
     return $randomString;
 }
-function SessionKontrol()
-{
+if (isset($_POST['hesapGuncelle'])) {
+    $id = $_SESSION['id'];
+    $adSoyad = $_POST['adSoyad'];
+    $eposta = $_POST['eposta'];
+    $sifre = $_POST['sifre'];
+
+    if ($sifre == $_SESSION['sifre']) {
+        if (strlen($adSoyad) < 4 || strlen($eposta) < 4 ) {
+            header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=kisa");
+        } else {
+            $hesapGuncelle = $db->prepare("UPDATE kullanici SET
+            adSoyad=:adSoyad,
+            eposta=:eposta
+            WHERE id=:id");
+            $hesapGuncelle->execute(array(
+                "adSoyad"    => $adSoyad,
+                "eposta"     => $eposta,
+                "id"    => $_SESSION['id']
+            ));
+            if($hesapGuncelle)
+            {
+                $_SESSION['eposta'] = $eposta;
+                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=hesapOK");
+            } else {
+                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=bilinmeyen");
+            }
+        }
+    } else {
+        header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=gecerliSifre");
+    }
+}
+
+if (isset($_POST['sifreGuncelle'])) {
+    $id = $_SESSION['id'];
+    $gecerli = $_POST['gecerliSifre'];
+    $sifre = $_POST['sifre'];
+    $sifreTekrar = $_POST['sifreTekrar'];
+
+    if ($gecerli == $_SESSION['sifre']) {
+        if (strlen($sifre) < 4) {
+            header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=kisa");
+        } else {
+            $yeniSifreOlustur = $db->prepare("UPDATE kullanici SET
+            sifre=:sifre
+            WHERE id=:id");
+            $yeniSifreOlustur->execute(array(
+                "sifre"    => $sifre,
+                "id"    => $_SESSION['id']
+            ));
+            if($yeniSifreOlustur)
+            {
+                $_SESSION['sifre'] = $sifre;
+                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=sifreOK");
+            } else {
+                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=bilinmeyen");
+            }
+        }
+    } else {
+        header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=gecerliSifre");
+    }
 }
 
 function MailGonder($data, $eposta, $id, $gonderimTipi)
 {
     $url = 'http://' . $_SERVER['SERVER_NAME'];
-
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
@@ -164,7 +222,7 @@ function MailGonder($data, $eposta, $id, $gonderimTipi)
     $mail->SetFrom($mail->Username, 'Araba Karşılaştır');
     $mail->AddAddress($eposta, $eposta);
     $mail->CharSet = 'UTF-8';
-    
+
 
     if ($gonderimTipi == 1) {
         $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba, Yeni şifreniz: ' . $data . ' </br> <a href="' . $url . '">' . $url . '</div>';
@@ -174,9 +232,9 @@ function MailGonder($data, $eposta, $id, $gonderimTipi)
     $mail->MsgHTML($content);
     var_dump($mail);
     if ($mail->Send()) {
-         //e-posta başarılı ile gönderildi
-         echo "send";
-         die();
+        //e-posta başarılı ile gönderildi
+        echo "send";
+        die();
         return true;
     } else {
         // bir sorun var, sorunu ekrana bastıralım

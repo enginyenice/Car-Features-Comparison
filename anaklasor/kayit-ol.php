@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="tr">
-
+<title>Kayıt Ol</title>
 <?php include("./assets/head.php");
 
 $messageTitle = "";
