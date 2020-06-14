@@ -14,12 +14,26 @@ $dosya = $parcala[0];
 $sessionDurumu = (!empty($_SESSION['eposta'])) ? 1 : 0;
 //echo $sessionDurumu;
 switch ($dosya) {
-    case 'kayit-ol': case 'sifremi-unuttum': case 'giris':
-        if($sessionDurumu == 1)
+    case 'kayit-ol':
+    case 'sifremi-unuttum':
+    case 'giris':
+        if ($sessionDurumu == 1)
             iceriYonlendir();
-    break;
-    case 'index': case '': case 'hesabim': case 'arac':
-        if($sessionDurumu == 0)
+        break;
+    case 'index':
+    case '':
+    case 'hesabim':
+    case 'arac-listesi':
+    case 'arac-duzenle':
+    case 'arac-ekle':
+    case 'marka-listesi':
+    case 'marka-ekle':
+    case 'marka-duzenle':
+    case 'model-listesi':
+    case 'model-ekle':
+    case 'model-duzenle':
+
+        if ($sessionDurumu == 0)
             girisYonlendir();
 }
 
@@ -28,7 +42,8 @@ function girisYonlendir()
 {
     header("Location: /araba-karsilastirma/anaklasor/giris.php");
 }
-function iceriYonlendir(){
+function iceriYonlendir()
+{
     header("Location: /araba-karsilastirma/anaklasor/index.php");
 }
 
