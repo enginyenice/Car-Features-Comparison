@@ -1,4 +1,5 @@
     <!-- Navbar START-->
+ 
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
         <a class="navbar-brand" href="#">Araç Karşılaştırma</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -8,13 +9,13 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item <?=($dosya == 'index' || $dosya == '')? "active font-weight-bold" : "" ?>">
                     <a class="nav-link" href="index.php">Ana Sayfa</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Araç İşlemleri</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?=($dosya == 'hesabim')? "active font-weight-bold" : "" ?>">
                     <a class="nav-link" href="hesabim.php">Hesabım</a>
                 </li>
                 <li class="nav-item dropdown">
