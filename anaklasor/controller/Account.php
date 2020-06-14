@@ -30,7 +30,7 @@ if (isset($_POST["girisYap"])) {
             $_SESSION['eposta'] = $kullaniciBilgiCek['eposta'];
             $_SESSION['id'] = $kullaniciBilgiCek['id'];
             $_SESSION['sifre'] = $kullaniciBilgiCek['sifre'];
-            header("Location: /araba-karsilastirma/anaklasor/index.php");
+            header("Location: /araba-karsilastirma/anaklasor/arac/arac-listesi.php");
         } else {
             header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=aktivasyon");
         }

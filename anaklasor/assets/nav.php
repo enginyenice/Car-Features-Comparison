@@ -12,8 +12,14 @@
                 <li class="nav-item <?=($dosya == 'index' || $dosya == '')? "active font-weight-bold" : "" ?>">
                     <a class="nav-link" href="index.php">Ana Sayfa</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Araç İşlemleri</a>
+                <li class="nav-item <?=($dosya == 'arac-listesi')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="arac-listesi.php">Araç Listesi</a>
+                </li>
+                <li class="nav-item <?=($dosya == 'marka-listesi')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="marka-listesi.php">Marka Listesi</a>
+                </li>
+                <li class="nav-item <?=($dosya == 'model-listesi')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="model-listesi.php">Model Listesi</a>
                 </li>
                 <li class="nav-item <?=($dosya == 'hesabim')? "active font-weight-bold" : "" ?>">
                     <a class="nav-link" href="hesabim.php">Hesabım</a>

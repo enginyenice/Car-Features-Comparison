@@ -3,7 +3,6 @@
 ob_start();
 session_start();
 include("./controller/DB.php");
-
 //echo $_SERVER['SCRIPT_NAME'];
 // 1. örnek
 $pizza  = $_SERVER['SCRIPT_NAME'];
@@ -19,7 +18,7 @@ switch ($dosya) {
         if($sessionDurumu == 1)
             iceriYonlendir();
     break;
-    case 'index': case '': case 'hesabim':
+    case 'index': case '': case 'hesabim': case 'arac':
         if($sessionDurumu == 0)
             girisYonlendir();
 }
