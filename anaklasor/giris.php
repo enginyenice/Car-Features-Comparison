@@ -1,7 +1,9 @@
+<?php include("./assets/session.php"); ?>
 <!doctype html>
 <html lang="tr">
 <title>Giriş Yap</title>
-<?php include("./assets/head.php");
+<?php 
+include("./assets/head.php");
 
 $messageTitle = "";
 $message = "";
@@ -42,19 +44,7 @@ switch($_GET['bilgi'])
 
             <form action="./controller/Account.php" method="POST">
                 <h3 class="title text-center">Giriş Yap</h3>
-                <?php 
-                if(isset($_GET['bilgi'])){ ?>
-                
-                <div class="alert alert-<?=$status?> alert-dismissible fade show" role="alert">
-                    <strong><?=$message?></strong> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                
-                
-                <?php } ?>
-
+                <?php include("./assets/alert.php"); ?>
                 <div class="form-group email">
                     <label>Eposta:</label>
                     <input class="form-control" name="eposta" required type="email">

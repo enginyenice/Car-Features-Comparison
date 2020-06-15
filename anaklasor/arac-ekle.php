@@ -1,3 +1,4 @@
+<?php include("./assets/session.php"); ?>
 <!doctype html>
 <html lang="tr">
 <title>Arac Ekle</title>
@@ -6,28 +7,6 @@ include("./assets/head.php");
 include("./assets/nav.php");
 
 
-if (isset($_GET['bilgi'])) {
-
-    switch ($_GET['bilgi']) {
-        case 'ayniArac':
-            $message = "Bu Arac adı zaten kayıtlı";
-            $status = "warning";
-            break;
-        case 'resimBuyuk':
-            $message = "Resim boyutu 10MB büyük olamaz";
-            $status = "warning";
-            break;
-        case 'JPG':
-            $message = "Resim uzantısı JPG olmalıdır.";
-            $status = "warning";
-            break;
-        case 'bilinmeyen':
-            $message = "Daha sonra tekrar deneyiniz.";
-            $status = "danger";
-            break;
-    }
-}
-
 
 
 ?>
@@ -35,7 +14,7 @@ if (isset($_GET['bilgi'])) {
 <body class="">
 
 
-
+<?php include("./assets/alert.php"); ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
@@ -43,19 +22,6 @@ if (isset($_GET['bilgi'])) {
             </div>
             <div class="card-body">
                 <form action="./controller/Arac.php" class="mt-2" method="POST" enctype="multipart/form-data">
-                    <?php
-                    if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-
-                    <?php } ?>
-
                     <div class="row">
 
                         <div class="col col-md-4 form-group">
@@ -148,7 +114,7 @@ if (isset($_GET['bilgi'])) {
                     <div class="text-right buttons">
                         <input type="hidden" name="AracEkle">
                         <button class="btn btn-sm btn-primary">Ekle</button>
-                        <a href="Arac-listesi.php" class="btn btn-sm btn-danger">Geri</a>
+                        <a href="arac-listesi.php" class="btn btn-sm btn-danger">Geri</a>
                     </div>
 
                 </form>

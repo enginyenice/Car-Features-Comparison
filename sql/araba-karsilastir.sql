@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 15 Haz 2020, 11:20:45
+-- Üretim Zamanı: 15 Haz 2020, 20:12:54
 -- Sunucu sürümü: 8.0.17
 -- PHP Sürümü: 7.3.10
 
@@ -48,8 +48,9 @@ CREATE TABLE `arac` (
 --
 
 INSERT INTO `arac` (`id`, `marka_id`, `model_id`, `yil`, `agirlik`, `motorHacmi`, `tekerSayisi`, `maxHiz`, `vites`, `renk`, `yakitTuru`, `resim`) VALUES
-(17, 12, 16, 2000, 20.00, 20, 20, 20.00, 5, '20', '20', 'anaklasor/../images/2viqYilginc-araba.jpg'),
-(18, 10, 10, 2020, 2.00, 100, 4, 250.00, 6, 'Siyah', 'Benzinli', 'anaklasor/../images/t0JU3bmw-x1-desktop.jpg');
+(17, 12, 16, 2000, 20.00, 20, 20, 20.00, 5, '20', 'Elektrik', 'anaklasor/../images/2viqYilginc-araba.jpg'),
+(18, 10, 10, 2020, 2.00, 100, 4, 250.00, 6, 'Siyah', 'Benzinli', 'anaklasor/../images/t0JU3bmw-x1-desktop.jpg'),
+(19, 11, 11, 2020, 1.00, 1, 1, 1.00, 1, 'Mavi', 'Dizel', 'anaklasor/../images/Vf8jKHarita Gösterimi.png');
 
 -- --------------------------------------------------------
 
@@ -177,7 +178,7 @@ ALTER TABLE `model`
 -- Tablo için AUTO_INCREMENT değeri `arac`
 --
 ALTER TABLE `arac`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanici`

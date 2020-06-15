@@ -56,33 +56,18 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
 <body class="">
 
 
-
+<?php include("./assets/alert.php"); ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3>Model Listesi</h3>
                     <div class="ekle text-right mt-2">
-                        <a href="Model-ekle.php" class="btn btn-sm btn-primary">Model Ekle</a>
+                        <a href="model-ekle.php" class="btn btn-sm btn-primary">Model Ekle</a>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container">
-                    <?php if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-
-                    <?php } ?>
-
-                </div>
-
+            <div class="card-body table-responsive">
                 <form method="GET">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -124,7 +109,7 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                                 <td><?= $ModelCek['id'] ?></td>
                                 <td><?= $ModelCek['marka'] ?></td>
                                 <td><?= $ModelCek['model'] ?></td>
-                                <td><a href="Model-duzenle.php?id=<?= $ModelCek['id'] ?>" class="btn btn-success">Düzenle</a></td>
+                                <td><a href="model-duzenle.php?id=<?= $ModelCek['id'] ?>" class="btn btn-success">Düzenle</a></td>
                                 <td><button class="btn btn-danger" onclick="silBtn(<?= $ModelCek['id'] ?>,'<?= $ModelCek['Model'] ?>')">Sil</button></td>
                             </tr>
                         <?php } ?>

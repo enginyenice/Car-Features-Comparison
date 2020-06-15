@@ -2,36 +2,7 @@
 <html lang="tr">
 <title>Anasayfa</title>
 <?php include("./assets/head.php") ?>
-<?php include("./assets/nav.php") ?>
-
-<?php
-
-
-if (isset($_GET['bilgi'])) {
-
-    switch ($_GET['bilgi']) {
-        case 'kayit':
-            $message = "Marka başarıyla oluşturuldu.";
-            $status = "success";
-            break;
-        case 'duzenleme':
-            $message = "Marka başarıyla güncellendi.";
-            $status = "success";
-            break;
-        case 'sil':
-            $message = "Marka başarıyla silindi.";
-            $status = "success";
-            break;
-        case 'markaYok':
-            $message = "Duzenlemek istediginiz marka sistemde kayıtlı değil.";
-            $status = "warning";
-            break;
-        case 'bilinmeyen':
-            $message = "Beklenmedik bir hata oluştu.";
-            $status = "danger";
-            break;
-    }
-}
+<?php include("./assets/nav.php");
 
 if (isset($_GET['text']) && !empty($_GET['text'])) {
     $text = $_GET['text'];
@@ -49,7 +20,7 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
 <body class="">
 
 
-
+<?php include("./assets/alert.php"); ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
@@ -60,22 +31,7 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container">
-                    <?php if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-
-                    <?php } ?>
-
-                </div>
-
+            <div class="card-body table-responsive">
                 <form method="GET">
                     <div class="form-row">
                         <div class="form-group col-md-6">

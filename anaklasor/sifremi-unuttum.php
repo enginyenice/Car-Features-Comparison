@@ -35,18 +35,7 @@ switch($_GET['bilgi'])
 
         <form action="./controller/Account.php" method="POST">
                 <h3 class="title text-center">Şifremi Unuttum</h3>
-                <?php 
-                if(isset($_GET['bilgi'])){ ?>
-                
-                <div class="alert alert-<?=$status?> alert-dismissible fade show" role="alert">
-                    <strong><?=$message?></strong> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                
-                
-                <?php } ?>
+                <?php include("./assets/alert.php"); ?>
                 <div class="form-group email">
                     <label>Eposta:</label>
                     <input class="form-control" name="eposta" type="text">

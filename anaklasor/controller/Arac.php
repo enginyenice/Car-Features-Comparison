@@ -27,7 +27,7 @@ if (isset($_POST['AracEkle'])) {
     $resim = $_FILES['resim'];
     $boyut = $resim['size'];
     if ($boyut > (1024 * 1024 * 10)) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-ekle.php?bilgi=resimBuyuk");
+        header("Location: ../arac-ekle.php?bilgi=resimBuyuk");
     }
 
     $tip = $resim['type'];
@@ -35,11 +35,11 @@ if (isset($_POST['AracEkle'])) {
     $uzanti = explode('.', $isim);
     $uzanti = $uzanti[count($uzanti) - 1];
     if ($tip != 'image/jpeg' || $uzanti != 'jpg') {
-        header("Location: /araba-karsilastirma/anaklasor/arac-ekle.php?bilgi=JPG");
+        header("Location: ../arac-ekle.php?bilgi=JPG");
     }
     $dosya = $resim['tmp_name'];
     $yeniAd = RandomTextUret(5) . $resim['name'];
-    $yeniYol = "../images/" . $yeniAd;
+    $yeniYol = ".../images/" . $yeniAd;
     $yol = $yeniYol;
     copy($dosya, $yeniYol);
     $aracOlustur = $db->prepare("INSERT INTO arac SET 
@@ -72,9 +72,9 @@ if (isset($_POST['AracEkle'])) {
    
 
     if ($insert) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=kayit");
+        header("Location: ../arac-listesi.php?bilgi=kayit");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/arac-ekle.php?bilgi=bilinmeyen");
+        header("Location: ../arac-ekle.php?bilgi=bilinmeyen");
     }
 }
 
@@ -123,9 +123,9 @@ if (isset($_POST['aracDuzenle'])) {
    
 
     if ($insert) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=duzenleme");
+        header("Location: ../arac-listesi.php?bilgi=duzenleme");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=bilinmeyen");
+        header("Location: ../arac-listesi.php?bilgi=bilinmeyen");
     }
 }
 
@@ -135,7 +135,7 @@ if(isset($_POST['resimDuzenle']))
     $resim = $_FILES['resim'];
     $boyut = $resim['size'];
     if ($boyut > (1024 * 1024 * 10)) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?bilgi=resimBuyuk");
+        header("Location: ../arac-duzenle.php?bilgi=resimBuyuk");
     }
 
     $tip = $resim['type'];
@@ -143,11 +143,11 @@ if(isset($_POST['resimDuzenle']))
     $uzanti = explode('.', $isim);
     $uzanti = $uzanti[count($uzanti) - 1];
     if ($tip != 'image/jpeg' || $uzanti != 'jpg') {
-        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?bilgi=JPG");
+        header("Location: ../arac-duzenle.php?bilgi=JPG");
     }
     $dosya = $resim['tmp_name'];
     $yeniAd = RandomTextUret(5) . $resim['name'];
-    $yeniYol = "../images/" . $yeniAd;
+    $yeniYol = ".../images/" . $yeniAd;
     $yol = $yeniYol;
     copy($dosya, $yeniYol);
     $aracResimDuzenle = $db->prepare("UPDATE arac SET resim=:resim WHERE id=:id");
@@ -157,9 +157,9 @@ if(isset($_POST['resimDuzenle']))
 
     ));
     if ($update) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=resimDuzenle");
+        header("Location: ../arac-listesi.php?bilgi=resimDuzenle");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/arac-duzenle.php?bilgi=bilinmeyen");
+        header("Location: ../arac-duzenle.php?bilgi=bilinmeyen");
     }
 }
 
@@ -170,9 +170,9 @@ if (isset($_GET['sil'])) {
         "id" =>  $id
     ));
     if ($sil) {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=sil");
+        header("Location: ../arac-listesi.php?bilgi=sil");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php?bilgi=bilinmeyen");
+        header("Location: ../arac-listesi.php?bilgi=bilinmeyen");
     }
 }
 

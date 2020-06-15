@@ -44,26 +44,13 @@ switch($_GET['bilgi'])
 ?>
 
 <body class="bg-light mt-4">
-
+<?php include("./assets/alert.php"); ?>
     <div class="container-fluid">
         <h2 class="title text-center mt-3 pb-2 pt-5">Araba Karşılaştır</h2>
         <div class="login mx-auto p-3 col col-xl-6 col-lg-7 col-md-8 col-10 col-sm-12 border border-secondary rounded">
 
             <form action="./controller/Account.php" method="POST">
                 <h3 class="title text-center">Kayıt Ol</h3>
-
-                <?php 
-                if(isset($_GET['bilgi'])){ ?>
-                
-                    <div class="alert alert-<?=$status?> alert-dismissible fade show" role="alert">
-                        <strong><?=$message?></strong> 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    
-                    
-                    <?php } ?>
                 <div class="form-group email">
                     <label>Ad Soyad:</label>
                     <input class="form-control" name="adSoyad" type="text">

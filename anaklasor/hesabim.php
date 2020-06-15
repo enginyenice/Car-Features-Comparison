@@ -1,34 +1,8 @@
+<?php include("./assets/session.php"); ?>
 <!doctype html>
 <html lang="tr">
 
 <?php include("./assets/head.php");
-$message = "";
-$status = "";
-if (isset($_GET['bilgi'])) {
-
-    switch ($_GET['bilgi']) {
-        case 'gecerliSifre':
-            $message = "Geçerli şifre doğru değil.";
-            $status = "danger";
-            break;
-        case 'kisa':
-            $message = "Bütün alanlar en az 3 karakter olmalidir";
-            $status = "warning";
-            break;
-        case 'sifreOK':
-            $message = "Şifre bilgileri güncelleştirildi.";
-            $status = "success";
-            break;
-        case 'hesapOK':
-            $message = "Hesap bilgileri güncelleştirildi.";
-            $status = "success";
-            break;
-        case 'bilinmeyen':
-            $message = "Daha sonra tekrar deneyiniz.";
-            $status = "danger";
-            break;
-    }
-}
 ?>
 <title>Hesabım</title>
 <?php include("./assets/nav.php") ?>
@@ -41,22 +15,9 @@ if (isset($_GET['bilgi'])) {
         "id" => $_SESSION['id']
     ));
     $kullaniciCek = $kullaniciSor->fetch(PDO::FETCH_ASSOC);
-
+    include("./assets/alert.php");
     ?>
 
-
-    <div class="container">
-        <?php if (isset($_GET['bilgi'])) { ?>
-
-            <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                <strong><?= $message ?></strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-
-        <?php } ?>
         <div class="row justify-content-md-center">
             <div class="col col-lg-6 col-md-6 col-12  col-sm-12 col-xs-12">
                 <div class="card  mt-2 mb-2">

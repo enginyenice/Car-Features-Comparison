@@ -25,19 +25,7 @@ if (isset($_GET['id'])) {
 }
 
 
-if (isset($_GET['bilgi'])) {
 
-    switch ($_GET['bilgi']) {
-        case 'ayniModel':
-            $message = "Bu Model adı zaten kayıtlı";
-            $status = "warning";
-            break;
-        case 'bilinmeyen':
-            $message = "Daha sonra tekrar deneyiniz.";
-            $status = "danger";
-            break;
-    }
-}
 
 
 
@@ -45,7 +33,7 @@ if (isset($_GET['bilgi'])) {
 
 <body class="">
 
-
+<?php include("./assets/alert.php"); ?>
 
     <div class="container-fluid">
         <div class="card">
@@ -54,19 +42,6 @@ if (isset($_GET['bilgi'])) {
             </div>
             <div class="card-body">
                 <form action="./controller/Model.php" class="mt-2" method="POST">
-                    <?php
-                    if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-
-                    <?php } ?>
-
                     <div class="form-group">
                         <label>Marka:</label>
                         <div class="form-group">
@@ -90,7 +65,7 @@ if (isset($_GET['bilgi'])) {
                     <div class="text-right buttons">
                         <input type="hidden" name="modelDuzenle" value="<?=$modelCek['id']?>">
                         <button class="btn btn-sm btn-primary">Duzenle</button>
-                        <a href="Model-listesi.php" class="btn btn-sm btn-danger">Geri</a>
+                        <a href="model-listesi.php" class="btn btn-sm btn-danger">Geri</a>
                     </div>
 
                 </form>

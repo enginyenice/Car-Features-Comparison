@@ -21,12 +21,12 @@ if (isset($_POST['markaEkle'])) {
         ));
 
         if ($insert) {
-            header("Location: /araba-karsilastirma/anaklasor/marka-listesi.php?bilgi=kayit");
+            header("Location: ../marka-listesi.php?bilgi=kayit");
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/marka-ekle.php?bilgi=bilinmeyen");
+            header("Location: ../marka-ekle.php?bilgi=bilinmeyen");
         }
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/marka-ekle.php?bilgi=ayniMarka");
+        header("Location: ../marka-ekle.php?bilgi=ayniMarka");
     }
 }
 
@@ -48,13 +48,13 @@ if (isset($_POST['markaDuzenle'])) {
             "id"    => $id
         ));
         if ($markaDuzenle) {
-            header("Location: /araba-karsilastirma/anaklasor/marka-listesi.php?bilgi=duzenleme");
+            header("Location: ../marka-listesi.php?bilgi=duzenleme");
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/marka-duzenle.php?id=" . $id . "&bilgi=bilinmeyen");
+            header("Location: ../marka-duzenle.php?id=" . $id . "&bilgi=bilinmeyen");
         }
     } else {
 
-        header("Location: /araba-karsilastirma/anaklasor/marka-duzenle.php?id=" . $id . "&bilgi=ayniMarka");
+        header("Location: ../marka-duzenle.php?id=" . $id . "&bilgi=ayniMarka");
     }
 }
 
@@ -66,8 +66,8 @@ if (isset($_GET['sil'])) {
     ));
     if($sil)
     {
-        header("Location: /araba-karsilastirma/anaklasor/marka-listesi.php?bilgi=sil");
+        header("Location: ../marka-listesi.php?bilgi=sil");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/marka-listesi.php?bilgi=bilinmeyen");
+        header("Location: ../marka-listesi.php?bilgi=bilinmeyen");
     }
 }

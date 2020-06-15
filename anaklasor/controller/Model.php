@@ -15,9 +15,9 @@ if (isset($_POST['modelEkle'])) {
     ));
 
     if ($insert) {
-        header("Location: /araba-karsilastirma/anaklasor/model-listesi.php?bilgi=kayit");
+        header("Location: ../model-listesi.php?bilgi=kayit");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/model-ekle.php?bilgi=bilinmeyen");
+        header("Location: ../model-ekle.php?bilgi=bilinmeyen");
     }
 }
 
@@ -41,13 +41,13 @@ if (isset($_POST['modelDuzenle'])) {
             "id"    => $id
         ));
         if ($modelDuzenle) {
-            header("Location: /araba-karsilastirma/anaklasor/model-listesi.php?bilgi=duzenleme");
+            header("Location: ../model-listesi.php?bilgi=duzenleme");
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/model-duzenle.php?id=" . $id . "&bilgi=bilinmeyen");
+            header("Location: ../model-duzenle.php?id=" . $id . "&bilgi=bilinmeyen");
         }
     } else {
 
-        header("Location: /araba-karsilastirma/anaklasor/model-duzenle.php?id=" . $id . "&bilgi=aynimodel");
+        header("Location: ../model-duzenle.php?id=" . $id . "&bilgi=aynimodel");
     }
 }
 
@@ -58,8 +58,8 @@ if (isset($_GET['sil'])) {
         "id" =>  $id
     ));
     if ($sil) {
-        header("Location: /araba-karsilastirma/anaklasor/model-listesi.php?bilgi=sil");
+        header("Location: ../model-listesi.php?bilgi=sil");
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/model-listesi.php?bilgi=bilinmeyen");
+        header("Location: ../model-listesi.php?bilgi=bilinmeyen");
     }
 }

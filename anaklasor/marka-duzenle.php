@@ -25,28 +25,12 @@ if (isset($_GET['id'])) {
     header("Location: /araba-karsilastirma/anaklasor/marka-listesi.php");
 }
 
-if (isset($_GET['bilgi'])) {
-
-switch ($_GET['bilgi']) {
-case 'ayniMarka':
-$message = "Bu marka adı zaten kayıtlı";
-$status = "warning";
-break;
-case 'bilinmeyen':
-$message = "Daha sonra tekrar deneyiniz.";
-$status = "danger";
-break;
-}
-}
-
-
-
 ?>
 
 <body class="">
 
 
-
+<?php include("./assets/alert.php"); ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
@@ -54,18 +38,6 @@ break;
             </div>
             <div class="card-body">
                 <form action="./controller/Marka.php" class="mt-2" method="POST">
-                    <?php
-                    if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-
-                    <?php } ?>
 
                     <div class="form-group">
                         <label>Marka:</label>

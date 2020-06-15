@@ -25,17 +25,22 @@ if (isset($_POST["girisYap"])) {
         ));
         $kullaniciBilgiCek = $kullaniciBilgiSor->fetch(PDO::FETCH_ASSOC);
         $aktifMi = (strlen($kullaniciBilgiCek['aktivasyonKodu']) == 0) ? true : false;
-
+        var_dump($kullaniciBilgiCek);
+        var_dump($aktifMi);
         if ($aktifMi) {
             $_SESSION['eposta'] = $kullaniciBilgiCek['eposta'];
             $_SESSION['id'] = $kullaniciBilgiCek['id'];
             $_SESSION['sifre'] = $kullaniciBilgiCek['sifre'];
-            header("Location: /araba-karsilastirma/anaklasor/arac-listesi.php");
+            header("Location: ../giris.php");
+            //header("Location: http://www.google.com");
+            header("Location: ../index.php");
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=aktivasyon");
+            header("Location: ../giris.php?bilgi=aktivasyon");
+            
         }
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=bilgi");
+
+        header("Location: ../giris.php?bilgi=bilgi");
     }
 }
 if (isset($_POST['kayitOl'])) {
@@ -53,11 +58,11 @@ if (isset($_POST['kayitOl'])) {
     $epostaVarMi = ($epostaCek['Adet'] > 0) ? true : false;
 
     if (strlen($adSoyad) < 4 || strlen($eposta) < 4 || strlen($sifre) < 4) {
-        header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=kisa");
+        header("Location: ../kayit-ol.php?bilgi=kisa");
     } else if ($sifre != $sifre2) {
-        header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=sifre");
+        header("Location: ../kayit-ol.php?bilgi=sifre");
     } else if ($epostaVarMi) {
-        header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=eposta");
+        header("Location: ../kayit-ol.php?bilgi=eposta");
     } else {
 
         //Kayıt Oluşturuldu..
@@ -84,12 +89,12 @@ if (isset($_POST['kayitOl'])) {
             $id = $idCek['id'];
             $sonuc = MailGonder($aktivasyonKodu, $eposta, $id, 0);
             if ($sonuc) {
-                header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=aktivasyon");
+                header("Location: ../giris.php?bilgi=aktivasyon");
             } else {
-                header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=mail");
+                header("Location: ../kayit-ol.php?bilgi=mail");
             }
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/kayit-ol.php?bilgi=bilinmiyor");
+            header("Location: ../kayit-ol.php?bilgi=bilinmiyor");
         }
         //Giriş Yap
 
@@ -124,15 +129,15 @@ if (isset($_POST['sifremiUnuttum'])) {
         if ($yeniSifreOlustur) {
             $sonuc =  MailGonder($NewPassword, $eposta, 0, 1);
             if ($sonuc) {
-                header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=yeniSifre");
+                header("Location: ../giris.php?bilgi=yeniSifre");
             } else {
-                header("Location: /araba-karsilastirma/anaklasor/sifremi-unuttum.php?bilgi=mail");
+                header("Location: ../sifremi-unuttum.php?bilgi=mail");
             }
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/sifremi-unuttum.php?bilgi=bilinmiyor");
+            header("Location: ../sifremi-unuttum.php?bilgi=bilinmiyor");
         }
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/sifremi-unuttum.php?bilgi=epostaYok");
+        header("Location: ../sifremi-unuttum.php?bilgi=epostaYok");
     }
 }
 function RandomTextUret($length = 10)
@@ -153,7 +158,7 @@ if (isset($_POST['hesapGuncelle'])) {
 
     if ($sifre == $_SESSION['sifre']) {
         if (strlen($adSoyad) < 4 || strlen($eposta) < 4 ) {
-            header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=kisa");
+            header("Location: ../hesabim.php?bilgi=kisa");
         } else {
             $hesapGuncelle = $db->prepare("UPDATE kullanici SET
             adSoyad=:adSoyad,
@@ -167,13 +172,13 @@ if (isset($_POST['hesapGuncelle'])) {
             if($hesapGuncelle)
             {
                 $_SESSION['eposta'] = $eposta;
-                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=hesapOK");
+                header("Location: ../hesabim.php?bilgi=hesapOK");
             } else {
-                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=bilinmeyen");
+                header("Location: ../hesabim.php?bilgi=bilinmeyen");
             }
         }
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=gecerliSifre");
+        header("Location: ../hesabim.php?bilgi=gecerliSifre");
     }
 }
 
@@ -185,7 +190,7 @@ if (isset($_POST['sifreGuncelle'])) {
 
     if ($gecerli == $_SESSION['sifre']) {
         if (strlen($sifre) < 4) {
-            header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=kisa");
+            header("Location: ../hesabim.php?bilgi=kisa");
         } else {
             $yeniSifreOlustur = $db->prepare("UPDATE kullanici SET
             sifre=:sifre
@@ -197,13 +202,13 @@ if (isset($_POST['sifreGuncelle'])) {
             if($yeniSifreOlustur)
             {
                 $_SESSION['sifre'] = $sifre;
-                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=sifreOK");
+                header("Location: ../hesabim.php?bilgi=sifreOK");
             } else {
-                header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=bilinmeyen");
+                header("Location: ../hesabim.php?bilgi=bilinmeyen");
             }
         }
     } else {
-        header("Location: /araba-karsilastirma/anaklasor/hesabim.php?bilgi=gecerliSifre");
+        header("Location: ../hesabim.php?bilgi=gecerliSifre");
     }
 }
 
@@ -227,19 +232,14 @@ function MailGonder($data, $eposta, $id, $gonderimTipi)
     if ($gonderimTipi == 1) {
         $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba, Yeni şifreniz: ' . $data . ' </br> <a href="' . $url . '">' . $url . '</div>';
     } else {
-        $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba,</br><a href="' . $url . '/araba-karsilastirma/anaklasor/aktivasyon.php?kod=' . $data . '&id=' . $id . '">Hesabımı Aktifleştir.</a></div>';
+        $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba,</br><a href="' . $url . '/anaklasor/aktivasyon.php?kod=' . $data . '&id=' . $id . '">Hesabımı Aktifleştir.</a></div>';
     }
     $mail->MsgHTML($content);
-    var_dump($mail);
     if ($mail->Send()) {
         //e-posta başarılı ile gönderildi
-        echo "send";
-        die();
         return true;
     } else {
         // bir sorun var, sorunu ekrana bastıralım
-        echo $mail->ErrorInfo;
-        die();
         return false;
     }
 }

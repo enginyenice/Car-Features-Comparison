@@ -1,1 +1,5 @@
-<?php header("Location: /araba-karsilastirma/anaklasor/giris.php"); ?>
+<?php
+
+header("Location: anaklasor/giris.php");
+//header("Location: /anaklasor/giris.php"); 
+?>

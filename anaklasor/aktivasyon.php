@@ -1,4 +1,5 @@
 <?php
+include("./assets/session.php");
 include("./controller/DB.php");
 
 if(isset($_GET['kod']) && isset($_GET['id']))
@@ -23,12 +24,12 @@ if(isset($_GET['kod']) && isset($_GET['id']))
         ));
         if($aktive)
         {
-            header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=aktive");
+            header("Location: giris.php?bilgi=aktive");
         } else {
-            header("Location: /araba-karsilastirma/anaklasor/giris.php?bilgi=hataliKod");
+            header("Location: giris.php?bilgi=hataliKod");
         }
     }
 
 } else {
-    echo "yok";
+    echo "404 NOT FOUND";
 }

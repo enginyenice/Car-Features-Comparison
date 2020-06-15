@@ -12,30 +12,24 @@
                 <li class="nav-item <?=($dosya == 'index' || $dosya == '')? "active font-weight-bold" : "" ?>">
                     <a class="nav-link" href="index.php">Ana Sayfa</a>
                 </li>
-                <li class="nav-item <?=($dosya == 'arac-listesi')? "active font-weight-bold" : "" ?>">
-                    <a class="nav-link" href="arac-listesi.php">Araç Listesi</a>
+               
+                <li class="nav-item <?=($dosya == 'marka-listesi' || $dosya == 'marka-duzenle' ||$dosya == 'marka-ekle')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="marka-listesi.php">Marka</a>
                 </li>
-                <li class="nav-item <?=($dosya == 'marka-listesi')? "active font-weight-bold" : "" ?>">
-                    <a class="nav-link" href="marka-listesi.php">Marka Listesi</a>
+                <li class="nav-item <?=($dosya == 'model-listesi' || $dosya == 'model-duzenle' ||$dosya == 'model-ekle')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="model-listesi.php">Model</a>
                 </li>
-                <li class="nav-item <?=($dosya == 'model-listesi')? "active font-weight-bold" : "" ?>">
-                    <a class="nav-link" href="model-listesi.php">Model Listesi</a>
+                <li class="nav-item <?=($dosya == 'arac-listesi' || $dosya == 'arac-duzenle' ||$dosya == 'arac-ekle')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="arac-listesi.php">Araç</a>
+                </li>
+                <li class="nav-item <?=($dosya == 'karsilastir')? "active font-weight-bold" : "" ?>">
+                    <a class="nav-link" href="karsilastir.php">Karşılaştır</a>
                 </li>
                 <li class="nav-item <?=($dosya == 'hesabim')? "active font-weight-bold" : "" ?>">
                     <a class="nav-link" href="hesabim.php">Hesabım</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
+
+               
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <a href="cikis-yap.php" class="btn btn-outline-danger my-2 my-sm-0">Çıkış Yap</a>

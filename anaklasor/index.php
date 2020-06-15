@@ -6,15 +6,14 @@
 <body class="">
  
 
-
+<?php include("./assets/alert.php"); ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                Anasayfa
+                Araç Karşılaştır
             </div>
             <div class="card-body">
-                <h5 class="card-title">Anasayfa Başlık</h5>
-                <p class="card-text">Blablabla</p>
+                <h5 class="card-title">Araç Karşılaştırma Sitesine Hoş Geldiniz...</h5>
             </div>
         </div>
     </div>

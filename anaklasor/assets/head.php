@@ -1,18 +1,12 @@
 <?php
-
-ob_start();
-session_start();
 include("./controller/DB.php");
-//echo $_SERVER['SCRIPT_NAME'];
-// 1. örnek
 $pizza  = $_SERVER['SCRIPT_NAME'];
 $dilimler = explode("/", $pizza);
-$dosya = $dilimler[3];
+$dosya = $dilimler[2];
 $parcala = explode(".", $dosya);
 $dosya = $parcala[0];
-
+$dosya = strtolower($dosya);
 $sessionDurumu = (!empty($_SESSION['eposta'])) ? 1 : 0;
-//echo $sessionDurumu;
 switch ($dosya) {
     case 'kayit-ol':
     case 'sifremi-unuttum':
@@ -32,19 +26,18 @@ switch ($dosya) {
     case 'model-listesi':
     case 'model-ekle':
     case 'model-duzenle':
-
+    case 'karsilastir.php':
         if ($sessionDurumu == 0)
             girisYonlendir();
 }
 
-
 function girisYonlendir()
 {
-    header("Location: /araba-karsilastirma/anaklasor/giris.php");
+    header("Location: ./giris.php");
 }
 function iceriYonlendir()
 {
-    header("Location: /araba-karsilastirma/anaklasor/index.php");
+    header("Location: ./index.php");
 }
 
 ?>

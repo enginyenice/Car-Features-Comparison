@@ -1,3 +1,4 @@
+<?php include("./assets/session.php"); ?>
 <!doctype html>
 <html lang="tr">
 <title>Araç Listesi</title>
@@ -34,41 +35,6 @@ function varMi($id)
     }
     return 0;
 }
-if (isset($_GET['bilgi'])) {
-
-    switch ($_GET['bilgi']) {
-        case 'kayit':
-            $message = "Arac başarıyla oluşturuldu.";
-            $status = "success";
-            break;
-            case 'secimYok':
-                $message = "Karşılaştırma için araç seçimi yapılmadı.";
-                $status = "success";
-                break;
-        case 'duzenleme':
-            $message = "Arac başarıyla güncellendi.";
-            $status = "success";
-            break;
-        case 'sil':
-            $message = "Arac başarıyla silindi.";
-            $status = "success";
-            break;
-        case 'AracYok':
-            $message = "Duzenlemek istediginiz Arac sistemde kayıtlı değil.";
-            $status = "warning";
-            break;
-
-        case 'resimDuzenle':
-            $message = "Araç resmi başarıyla değiştirildi.";
-            $status = "success";
-            break;
-
-        case 'bilinmeyen':
-            $message = "Beklenmedik bir hata oluştu.";
-            $status = "danger";
-            break;
-    }
-}
 
 if (isset($_GET['text']) && !empty($_GET['text'])) {
     $text = $_GET['text'];
@@ -99,14 +65,14 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
 <body class="">
 
 
-
+<?php include("./assets/alert.php") ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3>Araç Listesi</h3>
                     <div class="ekle text-right mt-2">
-                        <a href="Arac-ekle.php" class="btn btn-sm btn-primary">Arac Ekle</a>
+                        <a href="arac-ekle.php" class="btn btn-sm btn-primary">Arac Ekle</a>
                         <a id="karsilastirmaBtn" href="karsilastir.php" class="btn btn-sm btn-success">Karşılaştırma (<?php
                         if($dataLenght[0] > 0)
                         {
@@ -119,22 +85,7 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container">
-                    <?php if (isset($_GET['bilgi'])) { ?>
-
-                        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
-                            <strong><?= $message ?></strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-
-                    <?php } ?>
-
-                </div>
-
+            <div class="card-body table-responsive">
                 <form method="GET">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -172,10 +123,10 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
 
                 <div class="table-responsive mt-3">
                 </div>
-                <table class="table table-hover table-bordered">
+                <table class="table text-center table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>Seç</th>
+                            <th width=50>Seç</th>
                             <th width=200>Resim</th>
                             <th>Yıl</th>
                             <th>Renk</th>
@@ -189,7 +140,7 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                         <?php
                         while ($AracCek = $AracSor->fetch(PDO::FETCH_ASSOC)) { ?>
                             <tr>
-                                <td><input id="Check<?= $AracCek['AracID'] ?>" type="checkbox" onchange="karsilastirmaEkle(<?= $AracCek['AracID'] ?>)" name="aracSecim" 
+                                <td><input style=" width: 20px; height: 20px;" id="Check<?= $AracCek['AracID'] ?>" type="checkbox" onchange="karsilastirmaEkle(<?= $AracCek['AracID'] ?>)" name="aracSecim" 
                                 value="<?= $AracCek['AracID'] ?>" 
                                 <?php 
                                 $donut = varMi($AracCek['AracID']);
@@ -199,12 +150,12 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                                 }
                                 ?>
                                 >
-                                <td><img class="rounded" width="200px" src="<?= $AracCek['resim'] ?>" alt="" srcset=""></td>
+                                <td><img class="rounded" width="200px" height="100" src="<?= $AracCek['resim'] ?>" alt="" srcset=""></td>
                                 <td><?= $AracCek['yil'] ?></td>
                                 <td><?= $AracCek['renk'] ?></td>
                                 <td><?= $AracCek['marka'] ?></td>
                                 <td><?= $AracCek['model'] ?></td>
-                                <td><a href="Arac-duzenle.php?id=<?= $AracCek['AracID'] ?>" class="btn btn-success">Düzenle</a></td>
+                                <td><a href="arac-duzenle.php?id=<?= $AracCek['AracID'] ?>" class="btn btn-success">Düzenle</a></td>
                                 <td><button class="btn btn-danger" onclick="silBtn(<?= $AracCek['AracID'] ?>,'<?= $AracCek['Arac'] ?>')">Sil</button></td>
                             </tr>
                         <?php } ?>
