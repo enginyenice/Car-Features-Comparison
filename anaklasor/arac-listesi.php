@@ -6,7 +6,34 @@
 
 <?php
 
+$karsilastirmaLenght = $_COOKIE['karsilastirma'];
 
+    //var_dump($karsilastirmaData);
+    $dilimlerLenght = explode("[", $karsilastirmaLenght);
+    $datalarLenght = explode("]", $dilimlerLenght[1]);
+
+
+    $dataLenght = explode(",", $datalarLenght[0]);
+
+
+
+function varMi($id)
+{
+    $karsilastirmaData = $_COOKIE['karsilastirma'];
+
+    //var_dump($karsilastirmaData);
+    $dilimler = explode("[", $karsilastirmaData);
+    $datalar = explode("]", $dilimler[1]);
+
+
+    $data = explode(",", $datalar[0]);
+    //var_dump($data);
+    for ($i = 0; $i < count($data); $i++) {
+        if($data[$i] == $id)
+            return 1;
+    }
+    return 0;
+}
 if (isset($_GET['bilgi'])) {
 
     switch ($_GET['bilgi']) {
@@ -14,6 +41,10 @@ if (isset($_GET['bilgi'])) {
             $message = "Arac başarıyla oluşturuldu.";
             $status = "success";
             break;
+            case 'secimYok':
+                $message = "Karşılaştırma için araç seçimi yapılmadı.";
+                $status = "success";
+                break;
         case 'duzenleme':
             $message = "Arac başarıyla güncellendi.";
             $status = "success";
@@ -26,12 +57,12 @@ if (isset($_GET['bilgi'])) {
             $message = "Duzenlemek istediginiz Arac sistemde kayıtlı değil.";
             $status = "warning";
             break;
-        
+
         case 'resimDuzenle':
             $message = "Araç resmi başarıyla değiştirildi.";
             $status = "success";
             break;
-        
+
         case 'bilinmeyen':
             $message = "Beklenmedik bir hata oluştu.";
             $status = "danger";
@@ -43,8 +74,10 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
     $text = $_GET['text'];
     $tur = $_GET['tur'];
     if ($tur == "yil") {
-        $AracSor = $db->prepare('SELECT arac.id AS "AracID", arac.resim, arac.yil, arac.agirlik, arac.motorHacmi, arac.tekerSayisi, arac.maxHiz, arac.vites, arac.renk, arac.yakitTuru, marka.id AS "MarkaID", marka.marka,model.id AS "modelID", model.model  FROM arac INNER JOIN model ON model.id = arac.model_id INNER JOIN marka ON marka.id = arac.marka_id WHERE yil=' . $yil . '');
-        $AracSor->execute();
+        $AracSor = $db->prepare('SELECT arac.id AS "AracID", arac.resim, arac.yil, arac.agirlik, arac.motorHacmi, arac.tekerSayisi, arac.maxHiz, arac.vites, arac.renk, arac.yakitTuru, marka.id AS "MarkaID", marka.marka,model.id AS "modelID", model.model  FROM arac INNER JOIN model ON model.id = arac.model_id INNER JOIN marka ON marka.id = arac.marka_id WHERE yil=:yil');
+        $AracSor->execute(array(
+            "yil"   => $text
+        ));
     }
     if ($tur == "marka") {
         $AracSor = $db->prepare('SELECT arac.id AS "AracID", arac.resim, arac.yil, arac.agirlik, arac.motorHacmi, arac.tekerSayisi, arac.maxHiz, arac.vites, arac.renk, arac.yakitTuru, marka.id AS "MarkaID", marka.marka,model.id AS "modelID", model.model  FROM arac INNER JOIN model ON model.id = arac.model_id INNER JOIN marka ON marka.id = arac.marka_id WHERE marka LIKE "%' . $text . '%"');
@@ -74,6 +107,15 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                     <h3>Araç Listesi</h3>
                     <div class="ekle text-right mt-2">
                         <a href="Arac-ekle.php" class="btn btn-sm btn-primary">Arac Ekle</a>
+                        <a id="karsilastirmaBtn" href="karsilastir.php" class="btn btn-sm btn-success">Karşılaştırma (<?php
+                        if($dataLenght[0] > 0)
+                        {
+                            echo count($dataLenght);
+                        } else {
+                            echo 0;
+                        }
+                        
+                        ?>)</a>
                     </div>
                 </div>
             </div>
@@ -102,9 +144,9 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                             <?php if (isset($_GET['text'])) { ?>
 
                                 <select id="inputState" name="tur" class="form-control">
-                                    <option value="marka" <?=($tur == "marka")? "selected": "" ?>>Marka</option>
-                                    <option value="model" <?=($tur == "model")? "selected": "" ?>>Model</option>
-                                    <option value="yil" <?=($tur == "yil")? "selected": "" ?> >Yıl</option>
+                                    <option value="marka" <?= ($tur == "marka") ? "selected" : "" ?>>Marka</option>
+                                    <option value="model" <?= ($tur == "model") ? "selected" : "" ?>>Model</option>
+                                    <option value="yil" <?= ($tur == "yil") ? "selected" : "" ?>>Yıl</option>
                                 </select>
 
                             <?php } else { ?>
@@ -147,7 +189,16 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                         <?php
                         while ($AracCek = $AracSor->fetch(PDO::FETCH_ASSOC)) { ?>
                             <tr>
-                                <td><input type="checkbox" name="aracSecim" value="<?= $AracCek['AracID'] ?>">
+                                <td><input id="Check<?= $AracCek['AracID'] ?>" type="checkbox" onchange="karsilastirmaEkle(<?= $AracCek['AracID'] ?>)" name="aracSecim" 
+                                value="<?= $AracCek['AracID'] ?>" 
+                                <?php 
+                                $donut = varMi($AracCek['AracID']);
+                                if($donut == 1)
+                                {
+                                    echo "checked";
+                                }
+                                ?>
+                                >
                                 <td><img class="rounded" width="200px" src="<?= $AracCek['resim'] ?>" alt="" srcset=""></td>
                                 <td><?= $AracCek['yil'] ?></td>
                                 <td><?= $AracCek['renk'] ?></td>
@@ -171,6 +222,54 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
     include("./assets/script.php")
     ?>
     <script>
+        function karsilastirmaEkle(id, checkID) {
+            var input = document.getElementById("Check" + id);
+            var btn = document.getElementById("karsilastirmaBtn");
+            var myData = [];
+            //data = localStorage.getItem("karsilastirma");
+            data = $.cookie("karsilastirma");
+         // alert($.cookie("karsilastirma"));
+
+            //console.log(data)
+
+            if (data != null || data != undefined) {
+                data = JSON.parse(data);
+                data.forEach(element => {
+                    //console.log(element)
+                    myData.push(element)
+                });
+            }
+            if (input.checked) {
+                if (myData.length > 4) {
+                    swal({
+                        title: "Arac karşılaştırma",
+                        text: `Seçilen araç sayısı maksimum 5 olabilir`,
+                        icon: "warning"
+                    });
+                } else {
+                    myData.push(id);
+                }
+
+
+
+            } else {
+                let index;
+                for (let i = 0; i < myData.length; i++) {
+                    if (myData[i] == id)
+                        index = i;
+                }
+                myData.splice(index, 1);
+            }
+
+            //localStorage.setItem("karsilastirma", JSON.stringify(myData));
+            //alert(JSON.stringify(myData))
+            // $.cookie("karsilastirma", JSON.stringify(myData));
+            $.cookie("karsilastirma", JSON.stringify(myData));
+            console.log($.cookie("karsilastirma"));
+            btn.innerText = `Karşılaştırma (${myData.length})`;
+        }
+
+
         function silBtn(id, title) {
             swal({
                     title: "Arac sil",

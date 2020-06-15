@@ -36,14 +36,14 @@ if (isset($_GET['bilgi'])) {
 if (isset($_GET['text']) && !empty($_GET['text'])) {
     $text = $_GET['text'];
     $tur = $_GET['tur'];
-    if ($tur = "marka") {
+    if ($tur == "marka") {
         $ModelSor = $db->prepare("SELECT model.id,model.model,model.marka_id, marka.marka FROM model    INNER JOIN marka ON marka.id = model.marka_id WHERE marka LIKE '%" . $text . "%'");
         $ModelSor->execute();
-    } if ($tur = "model") {
+    }
+    if ($tur == "model") {
         $ModelSor = $db->prepare("SELECT model.id,model.model,model.marka_id, marka.marka FROM model    INNER JOIN marka ON marka.id = model.marka_id WHERE model LIKE '%" . $text . "%'");
         $ModelSor->execute();
     }
-    
 } else {
     $ModelSor = $db->prepare("SELECT model.id,model.model,model.marka_id, marka.marka FROM model    INNER JOIN marka ON marka.id = model.marka_id");
     $ModelSor->execute();
@@ -91,7 +91,7 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                         <div class="form-group col-md-4">
                             <select id="inputState" name="tur" class="form-control">
                                 <option value="model" selected>Model</option>
-                                <option value="marka" >Marka</option>
+                                <option value="marka">Marka</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
