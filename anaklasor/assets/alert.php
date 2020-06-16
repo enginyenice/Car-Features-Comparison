@@ -61,6 +61,26 @@ if (isset($_GET['bilgi'])) {
             $message = "Bu Model adı zaten kayıtlı";
             $status = "warning";
             break;
+        case 'ayniModel':
+            $message = "Bu Model adı zaten kayıtlı";
+            $status = "warning";
+            break;
+        case 'gecerliSifre':
+            $message = "Geçerli şifre doğru değil!!";
+            $status = "danger";
+            break;
+        case 'hesapOK':
+            $message = "Hesap Bilgileri başarıyla güncellendi";
+            $status = "success";
+            break;
+        case 'sifreUyusmuyor':
+            $message = "Girilen yeni şifreler birbirine uyuşmuyor";
+            $status = "danger";
+            break;
+            case 'sifreOK':
+                $message = "Şifre başarıyla güncellendi";
+                $status = "success";
+                break;
     }
 }
 

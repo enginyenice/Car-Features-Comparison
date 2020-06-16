@@ -17,7 +17,7 @@
     $kullaniciCek = $kullaniciSor->fetch(PDO::FETCH_ASSOC);
     include("./assets/alert.php");
     ?>
-
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <div class="col col-lg-6 col-md-6 col-12  col-sm-12 col-xs-12">
                 <div class="card  mt-2 mb-2">
@@ -77,13 +77,14 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
 
-        <?php
-        include("./assets/footer.php");
-        include("./assets/script.php")
-        ?>
+    <?php
+    include("./assets/footer.php");
+    include("./assets/script.php")
+    ?>
 
 </body>
 

@@ -36,7 +36,6 @@ if (isset($_POST["girisYap"])) {
             header("Location: ../index.php");
         } else {
             header("Location: ../giris.php?bilgi=aktivasyon");
-            
         }
     } else {
 
@@ -157,7 +156,7 @@ if (isset($_POST['hesapGuncelle'])) {
     $sifre = $_POST['sifre'];
 
     if ($sifre == $_SESSION['sifre']) {
-        if (strlen($adSoyad) < 4 || strlen($eposta) < 4 ) {
+        if (strlen($adSoyad) < 4 || strlen($eposta) < 4) {
             header("Location: ../hesabim.php?bilgi=kisa");
         } else {
             $hesapGuncelle = $db->prepare("UPDATE kullanici SET
@@ -169,8 +168,7 @@ if (isset($_POST['hesapGuncelle'])) {
                 "eposta"     => $eposta,
                 "id"    => $_SESSION['id']
             ));
-            if($hesapGuncelle)
-            {
+            if ($hesapGuncelle) {
                 $_SESSION['eposta'] = $eposta;
                 header("Location: ../hesabim.php?bilgi=hesapOK");
             } else {
@@ -192,19 +190,22 @@ if (isset($_POST['sifreGuncelle'])) {
         if (strlen($sifre) < 4) {
             header("Location: ../hesabim.php?bilgi=kisa");
         } else {
-            $yeniSifreOlustur = $db->prepare("UPDATE kullanici SET
+            if ($sifre == $sifreTekrar) {
+                $yeniSifreOlustur = $db->prepare("UPDATE kullanici SET
             sifre=:sifre
             WHERE id=:id");
-            $yeniSifreOlustur->execute(array(
-                "sifre"    => $sifre,
-                "id"    => $_SESSION['id']
-            ));
-            if($yeniSifreOlustur)
-            {
-                $_SESSION['sifre'] = $sifre;
-                header("Location: ../hesabim.php?bilgi=sifreOK");
+                $yeniSifreOlustur->execute(array(
+                    "sifre"    => $sifre,
+                    "id"    => $_SESSION['id']
+                ));
+                if ($yeniSifreOlustur) {
+                    $_SESSION['sifre'] = $sifre;
+                    header("Location: ../hesabim.php?bilgi=sifreOK");
+                } else {
+                    header("Location: ../hesabim.php?bilgi=bilinmeyen");
+                }
             } else {
-                header("Location: ../hesabim.php?bilgi=bilinmeyen");
+                header("Location: ../hesabim.php?bilgi=sifreUyusmuyor");
             }
         }
     } else {
