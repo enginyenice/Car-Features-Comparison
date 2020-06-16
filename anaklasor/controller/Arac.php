@@ -29,6 +29,14 @@ if (isset($_POST['AracEkle'])) {
     if ($boyut > (1024 * 1024 * 10)) {
         header("Location: ../arac-ekle.php?bilgi=resimBuyuk");
     }
+    if($model == "")
+    {
+        header("Location: ../arac-ekle.php?bilgi=modelBos");
+    }
+    if($marka == "")
+    {
+        header("Location: ../arac-ekle.php?bilgi=marka");
+    }
 
     $tip = $resim['type'];
     $isim = $resim['name'];
@@ -39,7 +47,7 @@ if (isset($_POST['AracEkle'])) {
     }
     $dosya = $resim['tmp_name'];
     $yeniAd = RandomTextUret(5) . $resim['name'];
-    $yeniYol = ".../images/" . $yeniAd;
+    $yeniYol = "../images/" . $yeniAd;
     $yol = $yeniYol;
     copy($dosya, $yeniYol);
     $aracOlustur = $db->prepare("INSERT INTO arac SET 
@@ -147,7 +155,7 @@ if(isset($_POST['resimDuzenle']))
     }
     $dosya = $resim['tmp_name'];
     $yeniAd = RandomTextUret(5) . $resim['name'];
-    $yeniYol = ".../images/" . $yeniAd;
+    $yeniYol = "../images/" . $yeniAd;
     $yol = $yeniYol;
     copy($dosya, $yeniYol);
     $aracResimDuzenle = $db->prepare("UPDATE arac SET resim=:resim WHERE id=:id");

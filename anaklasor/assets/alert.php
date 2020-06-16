@@ -77,10 +77,64 @@ if (isset($_GET['bilgi'])) {
             $message = "Girilen yeni şifreler birbirine uyuşmuyor";
             $status = "danger";
             break;
-            case 'sifreOK':
-                $message = "Şifre başarıyla güncellendi";
-                $status = "success";
-                break;
+        case 'sifreOK':
+            $message = "Şifre başarıyla güncellendi";
+            $status = "success";
+            break;
+        case 'modelBos':
+            $message = "Model seçilmedi. İşlem Başarısız";
+            $status = "danger";
+            break;
+        case 'markaBos':
+            $message = "Marka seçilmedi. İşlem Başarısız";
+            $status = "danger";
+            break;
+        case 'bilgi':
+            $message = "E-Posta veya şifre hatalı";
+            $status = "danger";
+            break;
+        case 'aktivasyon':
+            $message = "Hesabınızı aktifleştirmek için lütfen eposta adresinizi kontrol ediniz..";
+            $status = "warning";
+            break;
+        case 'yeniSifre':
+            $message = "Yeni şifreniz mailinize gönderilmiştir.";
+            $status = "success";
+            break;
+        case 'aktive':
+            $message = "Hesabınız aktifleştirildi.";
+            $status = "success";
+            break;
+        case 'hataliKod':
+            $message = "Hesabınız aktifleştirilemedi. Yönetici ile iletişime geçiniz...";
+            $status = "error";
+            break;
+        case 'kisa':
+            $message = "Bütün alanlar en az 4 karakter olmalidir";
+            $status = "warning";
+            break;
+        case 'sifre':
+            $message = "Parola ve parola tekrar aynı değil";
+            $status = "warning";
+            break;
+        case 'eposta':
+            $message = "E-Posta Kayıtlı";
+            $status = "danger";
+            break;
+        case 'aktivasyon':
+            $message = "Hesap Oluşturuldu. Hesabınızı aktifleştirmek için lütfen eposta adresinizi kontrol ediniz..";
+            $status = "success";
+            break;
+        case 'mail':
+            $message = "Hesap Oluşturuldu. Mail Sunucularında oluştu. Lütfen bekleyiniz...";
+            $status = "danger";
+
+            break;
+        case 'bilinmiyor':
+            $message = "Bilinmeyen bir hata oluştu...";
+            $status = "danger";
+
+            break;
     }
 }
 

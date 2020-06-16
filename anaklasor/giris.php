@@ -4,37 +4,7 @@
 <title>Giriş Yap</title>
 <?php 
 include("./assets/head.php");
-
-$messageTitle = "";
-$message = "";
-$status = "";
-if(isset($_GET['bilgi'])){
-
-switch($_GET['bilgi'])
-{
-    case 'bilgi':
-        $message = "E-Posta veya şifre hatalı";
-        $status = "danger";
-    break;
-    case 'aktivasyon':
-        $message = "Hesabınızı aktifleştirmek için lütfen eposta adresinizi kontrol ediniz..";
-        $status = "warning";
-    break;
-    case 'yeniSifre':
-        $message = "Yeni şifreniz mailinize gönderilmiştir.";
-        $status = "success";
-    break;
-    case 'aktive':
-        $message = "Hesabınız aktifleştirildi.";
-        $status = "success";
-    break;
-    case 'hataliKod':
-        $message = "Hesabınız aktifleştirilemedi. Yönetici ile iletişime geçiniz...";
-        $status = "error";
-    break;
-}
-
-} ?>
+?>
 
 <body class="bg-light mt-4">
 

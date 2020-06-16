@@ -233,7 +233,7 @@ function MailGonder($data, $eposta, $id, $gonderimTipi)
     if ($gonderimTipi == 1) {
         $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba, Yeni şifreniz: ' . $data . ' </br> <a href="' . $url . '">' . $url . '</div>';
     } else {
-        $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba,</br><a href="' . $url . '/anaklasor/aktivasyon.php?kod=' . $data . '&id=' . $id . '">Hesabımı Aktifleştir.</a></div>';
+        $content = '<div style="background: #eee; padding: 10px; font-size: 14px">Merhaba,</br><a href="' . $url . '/anaklasor/aktivasyon.php?kod=' . $data . '&id=' . $id . '">Hesabımı Aktifleştir.</a></hr></br> '.$url.'/anaklasor/aktivasyon.php?kod=' . $data . '&id=' . $id.' </div>';
     }
     $mail->MsgHTML($content);
     if ($mail->Send()) {

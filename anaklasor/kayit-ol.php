@@ -1,47 +1,7 @@
 <!doctype html>
 <html lang="tr">
 <title>Kayıt Ol</title>
-<?php include("./assets/head.php");
-
-$messageTitle = "";
-$message = "";
-$status = "";
-if(isset($_GET['bilgi'])){
-
-switch($_GET['bilgi'])
-{
-    case 'kisa':
-        $message = "Bütün alanlar en az 3 karakter olmalidir";
-        $status = "warning";
-    break;
-    case 'sifre':
-        $message = "Parola ve parola tekrar aynı değil";
-        $status = "warning";
-    break;
-    case 'eposta':
-        $message = "E-Posta Kayıtlı";
-        $status = "danger";
-    break;
-    case 'aktivasyon':
-        $message = "Hesap Oluşturuldu. Hesabınızı aktifleştirmek için lütfen eposta adresinizi kontrol ediniz..";
-        $status = "success";
-    break;
-    case 'mail':
-        $message = "Hesap Oluşturuldu. Mail Sunucularında oluştu. Lütfen bekleyiniz...";
-        $status = "danger";
-        
-    break;
-    case 'bilinmiyor':
-        $message = "Bilinmeyen bir hata oluştu...";
-        $status = "danger";
-        
-    break;
-}
-
-}
-
-
-?>
+<?php include("./assets/head.php"); ?>
 
 <body class="bg-light mt-4">
 <?php include("./assets/alert.php"); ?>

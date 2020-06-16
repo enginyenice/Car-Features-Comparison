@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 15 Haz 2020, 20:12:54
+-- Üretim Zamanı: 16 Haz 2020, 11:30:25
 -- Sunucu sürümü: 8.0.17
 -- PHP Sürümü: 7.3.10
 
@@ -43,15 +43,6 @@ CREATE TABLE `arac` (
   `resim` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Tablo döküm verisi `arac`
---
-
-INSERT INTO `arac` (`id`, `marka_id`, `model_id`, `yil`, `agirlik`, `motorHacmi`, `tekerSayisi`, `maxHiz`, `vites`, `renk`, `yakitTuru`, `resim`) VALUES
-(17, 12, 16, 2000, 20.00, 20, 20, 20.00, 5, '20', 'Elektrik', 'anaklasor/../images/2viqYilginc-araba.jpg'),
-(18, 10, 10, 2020, 2.00, 100, 4, 250.00, 6, 'Siyah', 'Benzinli', 'anaklasor/../images/t0JU3bmw-x1-desktop.jpg'),
-(19, 11, 11, 2020, 1.00, 1, 1, 1.00, 1, 'Mavi', 'Dizel', 'anaklasor/../images/Vf8jKHarita Gösterimi.png');
-
 -- --------------------------------------------------------
 
 --
@@ -66,14 +57,6 @@ CREATE TABLE `kullanici` (
   `aktivasyonKodu` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Tablo döküm verisi `kullanici`
---
-
-INSERT INTO `kullanici` (`id`, `adSoyad`, `eposta`, `sifre`, `aktivasyonKodu`) VALUES
-(2, 'Engin Yenice', 'enginyenice2626@gmail.com', 'karakafkef22', ''),
-(9, 'Tolunay Esergün', 'tolunay50@gmail.com', 'ftgb7v9acJ', '');
-
 -- --------------------------------------------------------
 
 --
@@ -84,15 +67,6 @@ CREATE TABLE `marka` (
   `id` int(11) NOT NULL,
   `marka` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `marka`
---
-
-INSERT INTO `marka` (`id`, `marka`) VALUES
-(10, 'BMW'),
-(11, 'Ferrari'),
-(12, 'Audi');
 
 --
 -- Tetikleyiciler `marka`
@@ -119,20 +93,6 @@ CREATE TABLE `model` (
   `marka_id` int(11) NOT NULL,
   `model` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `model`
---
-
-INSERT INTO `model` (`id`, `marka_id`, `model`) VALUES
-(10, 10, 'x1'),
-(11, 11, '250 GTO'),
-(12, 11, 'Enzo'),
-(13, 11, 'F12 Berlinetta'),
-(14, 12, 'A3'),
-(15, 12, 'A4'),
-(16, 12, 'A5'),
-(17, 12, 'A6');
 
 --
 -- Tetikleyiciler `model`
@@ -178,13 +138,13 @@ ALTER TABLE `model`
 -- Tablo için AUTO_INCREMENT değeri `arac`
 --
 ALTER TABLE `arac`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `marka`

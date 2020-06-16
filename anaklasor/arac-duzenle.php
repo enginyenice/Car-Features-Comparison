@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
                             </div>
                         </div>
                         <div class="col col-md-6 form-group">
-                            <label>Arac:</label>
+                            <label>Model :</label>
                             <select id="model" name="model_id" class="form-control">
 
                             </select>

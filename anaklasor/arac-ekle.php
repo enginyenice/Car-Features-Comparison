@@ -47,7 +47,7 @@ include("./assets/nav.php");
                             </div>
                         </div>
                         <div class="col col-md-4 form-group">
-                            <label>Arac:</label>
+                            <label>Model :</label>
                             <select id="model" name="model_id" class="form-control">
 
                             </select>

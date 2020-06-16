@@ -191,7 +191,9 @@ if (isset($_GET['text']) && !empty($_GET['text'])) {
                 });
             }
             if (input.checked) {
+                
                 if (myData.length > 4) {
+                    input.checked = false;
                     swal({
                         title: "Arac karşılaştırma",
                         text: `Seçilen araç sayısı maksimum 5 olabilir`,
